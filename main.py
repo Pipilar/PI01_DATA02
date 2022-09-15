@@ -2,17 +2,27 @@ from fastapi import FastAPI
 import json
 import pandas as pd
 
-superapi = FastAPI()
+superapi = FastAPI(title = 'La SuperAPI de Pili',
+                   description = 'Esta es la API desarrollada por una alumna de Data Science de Henry, que tiene la finalidad de mostrar ciertas consultas que se realizaron sobre una base de datos relacionada a carreras automovilísticas. Los primeros métodos get devuelven los archivos JSON que fueron consultados para realizar las consultas, que corresponden a los últimos 4 get del listado. Aquellas consultas responden, cuál es el año en que se jugaron más carreras, cuál es el piloto con más primeros puestos ganados, cuál es el circuito donde más se corrieron carreras y por último, cuál es el piloto con mayor cantidad de puntos, utilizando únicamente autos de marcas británicas o norteamericanas',
+                   version = '1.0')
 
 # para conectar la api, en este caso la superapi, importamos fastapi desde main.py, y este archivo lo conectamos
-# a través de la consola git bash, usando el comando uvicorn main:superapi --reload (una vez que ingresamos al
-# directorio con el comando cd '<ruta de ubicación del archivo main.py>')
+# a través de la consola git bash, levantando el servidor usando el comando 'uvicorn main:superapi --reload'
+# (una vez que ingresamos al directorio con el comando cd '<ruta de ubicación del archivo main.py>')
+# con esta configuración, el presente archivo queda conectado al servidor de uvicorn, que gracias al '--reload'
+# todos los cambios que se efectúen en el presente archivo, se verán reflejados en localhost
 
-# previamente instalamos fastapi y uvicorn desde la terminal de visual
+# previamente instalamos fastapi y uvicorn desde la terminal de visual (con el comando pip install)
+
+# usamos el método get de HTTP que nos permite leer lo que la función devuelve, nos permite 
+# obtener un recurso por parte del servidor
+
+@superapi.get('/')
+
+async def bienvenida():
+    return 'Hola mortal, bienvenido a mi SuperAPI. Para obtener más información, ingresá con /docs a la documentación'
 
 # conectamos api con dataset de circuits
-
-# usamos el método get de HTTP que nos permite leer lo que la función devuelve
 
 @superapi.get('/circuits')
 
