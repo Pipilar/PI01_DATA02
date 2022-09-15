@@ -5,11 +5,14 @@ import pandas as pd
 superapi = FastAPI()
 
 # para conectar la api, en este caso la superapi, importamos fastapi desde main.py, y este archivo lo conectamos
-# a través de la consola git bash, usando el comando uvicorn main:superapi --reload
+# a través de la consola git bash, usando el comando uvicorn main:superapi --reload (una vez que ingresamos al
+# directorio con el comando cd '<ruta de ubicación del archivo main.py>')
 
 # previamente instalamos fastapi y uvicorn desde la terminal de visual
 
 # conectamos api con dataset de circuits
+
+# usamos el método get de HTTP que nos permite leer lo que la función devuelve
 
 @superapi.get('/circuits')
 
