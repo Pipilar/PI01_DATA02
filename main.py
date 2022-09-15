@@ -3,7 +3,12 @@ import json
 import pandas as pd
 
 superapi = FastAPI()
-    
+
+# para conectar la api, en este caso la superapi, importamos fastapi desde main.py, y este archivo lo conectamos
+# a través de la consola git bash, usando el comando uvicorn main:superapi --reload
+
+# previamente instalamos fastapi y uvicorn desde la terminal de visual
+
 # conectamos api con dataset de circuits
 
 @superapi.get('/circuits')
@@ -80,6 +85,7 @@ async def qualifying2():
 
 # CONSULTA 1: AÑO CON MÁS CARRERAS CORRIDAS
 
+# usamos un decorador para la función asíncrona, usamos el método get 
 @superapi.get('/año_con_mas_carreras')
 
 async def año_con_mas_carreras():
@@ -180,7 +186,7 @@ async def piloto_con_mas_puntos():
     british_o_american = results_y_constructors['nationality'].isin(['British','American'])
     
     # filtramos el df mergeado anteriormente
-    df_results_y_constructors = pd.DataFrame(results_y_constructors[british_o_american].groupby('driverId')['points'].count().sort_values(ascending = False))
+    df_results_y_constructors = pd.DataFrame(results_y_constructors[british_o_american].groupby('driverId')['points'].sum().sort_values(ascending = False))
     
     # le hacemos un pequeño arreglo
     df_results_y_constructors.reset_index(inplace = True)
